@@ -3,7 +3,7 @@ project(hw5)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp Sphere.cpp Sphere.h Point.h)
 add_executable(hw5 ${SOURCE_FILES})
 
 find_package(OpenGL REQUIRED)
