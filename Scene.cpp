@@ -6,7 +6,7 @@
 
 Scene::Scene() : eyeLoc(Vector3(1, 1, 1)) {}
 
-void Scene::render() {
+void Scene::writeToBuffer(PixelBuffer &buffer) {
   Ray ray = Ray(0, 0, 0, 1, 1, 1);
   addSphere(0, 0, 0, 1);
 
@@ -15,7 +15,7 @@ void Scene::render() {
   std::cout << ray.getPointAt(t);
 }
 
-float Scene::computeClosestIntersection(Ray ray) {
+float Scene::computeClosestIntersection(Ray ray) const {
   float closest = std::numeric_limits<float>::max();
 
   for (const auto& sphere : spheres) {

@@ -9,6 +9,7 @@
 #include <GLUT/glut.h>
 
 #include "Scene.h"
+#include "PixelBuffer.h"
 
 #else //linux
 #include <GL/gl.h>
@@ -17,20 +18,18 @@
 
 std::unique_ptr<Scene> scenePtr;
 
-#include <iostream>
-
 void init();
 void display();
 void key(unsigned char ch, int x, int y);
 void mouse(int button, int state, int x, int y);
 void check();
-void reshape(int width, int height);
+void reshape(size_t width, size_t height);
 void idle();
 void draw_pix(float x, float y, float r, float g, float b);
 void pix_to_norm(float* x, float* y);
 
-int screen_width = 400;
-int screen_height = 400;
+size_t screen_width = 400;
+size_t screen_height = 400;
 
 int main(int argc, char **argv) {
   glutInit(&argc, argv);
@@ -65,7 +64,7 @@ void init()
 }
 
 /*Gets called when display size changes, including initial craetion of the display*/
-void reshape(int width, int height) {
+void reshape(size_t width, size_t height) {
   /*set up projection matrix to define the view port*/
   //update the ne window width and height
   screen_width = width;
@@ -95,14 +94,18 @@ void idle() {
   glutPostRedisplay();
 }
 
-//this is where we render the screen
+//this is where we writeToBuffer the screen
 void display() {
   //clears the screen
   glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
   //clears the opengl Modelview transformation matrix
   glLoadIdentity();
 
-  scenePtr->render();
+  PixelBuffer pb(screen_width, screen_height);
+  pb.fill(1, 1, 1);
+
+  scenePtr->writeToBuffer(pb);
+  pb.display();
 
   //blits the current opengl framebuffer on the screen
   glutSwapBuffers();

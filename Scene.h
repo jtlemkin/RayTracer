@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Sphere.h"
 #include "Ray.h"
+#include "PixelBuffer.h"
 
 class Scene {
  public:
@@ -16,9 +17,9 @@ class Scene {
 
   void addSphere(float x, float y, float z, float radius);
 
-  void render();
+  void writeToBuffer(PixelBuffer& buffer);
 
-  float computeClosestIntersection(Ray ray);
+  float computeClosestIntersection(Ray ray) const;
  private:
   std::vector<Sphere> spheres;
 
