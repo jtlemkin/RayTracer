@@ -20,6 +20,7 @@ class Scene {
   void writeToBuffer(PixelBuffer& buffer);
 
   float computeClosestIntersection(Ray ray) const;
+  float computeRayAt(int i, int j, int N, float D) const;
  private:
   std::vector<Sphere> spheres;
 

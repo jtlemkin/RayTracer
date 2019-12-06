@@ -7,12 +7,19 @@
 Scene::Scene() : eyeLoc(Vector3(1, 1, 1)) {}
 
 void Scene::writeToBuffer(PixelBuffer &buffer) {
-  Ray ray = Ray(0, 0, 0, 1, 1, 1);
-  addSphere(0, 0, 0, 1);
+  for (int i = 0; i < buffer.getWidth(); i++) {
+    for (int j = 0; j < buffer.getHeight(); j++) {
+      //Find the associated ray for each pixel
+      Ray ray = computeRayAt(i, j);
 
-  float t = computeClosestIntersection(ray);
+      //Compute closest intersection with object in scene
+      //float intersection = computeClosestIntersection(ray);
 
-  std::cout << ray.getPointAt(t);
+      //Compute phong color for point
+
+      //Store color in pixel buffer
+    }
+  }
 }
 
 float Scene::computeClosestIntersection(Ray ray) const {
@@ -29,4 +36,10 @@ float Scene::computeClosestIntersection(Ray ray) const {
 
 void Scene::addSphere(float x, float y, float z, float radius) {
   spheres.emplace_back(x, y, z, radius);
+}
+
+float Scene::computeRayAt(int i, int j, int N, float D) const {
+  Vector3 pEye = Vector3((float) i / (float) N - 0.5f, (float) j / (float) N - 0.5f, D);
+
+  return 0;
 }

@@ -34,6 +34,9 @@ class PixelBuffer {
 
   void recordPixel(int i, int j, float r, float g, float b);
   void fill(float r, float g, float b);
+
+  size_t getWidth() const;
+  size_t getHeight() const;
 };
 
 #endif //HW5_PIXELBUFFER_H

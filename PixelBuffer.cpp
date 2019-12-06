@@ -26,3 +26,9 @@ void PixelBuffer::fill(float r, float g, float b) {
     }
   }
 }
+size_t PixelBuffer::getWidth() const {
+  return width;
+}
+size_t PixelBuffer::getHeight() const {
+  return height;
+}
