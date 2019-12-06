@@ -8,10 +8,14 @@
 //#include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 
+#include "Scene.h"
+
 #else //linux
 #include <GL/gl.h>
 #include <GL/glut.h>
 #endif
+
+std::unique_ptr<Scene> scenePtr;
 
 #include <iostream>
 
@@ -42,6 +46,8 @@ int main(int argc, char **argv) {
 
   //initialize opengl variables
   init();
+
+  scenePtr = std::make_unique<Scene>();
 
   //start glut event loop
   glutMainLoop();
@@ -95,6 +101,8 @@ void display() {
   glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
   //clears the opengl Modelview transformation matrix
   glLoadIdentity();
+
+  scenePtr->render();
 
   //blits the current opengl framebuffer on the screen
   glutSwapBuffers();

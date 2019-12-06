@@ -5,11 +5,14 @@
 #ifndef HW5_SPHERE_H
 #define HW5_SPHERE_H
 
-#include "Point.h"
+#include "Vector3.h"
 
 class Sphere {
- private:
-  Point center;
+ public:
+  Vector3 center;
+  float radius;
+
+  Sphere(float x, float y, float z, float radius);
 };
 
 #endif //HW5_SPHERE_H
