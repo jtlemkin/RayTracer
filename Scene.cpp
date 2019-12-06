@@ -4,13 +4,13 @@
 
 #include "Scene.h"
 
-Scene::Scene() : eyeLoc(Vector3(1, 1, 1)) {}
+Scene::Scene() {}
 
 void Scene::writeToBuffer(PixelBuffer &buffer) {
   for (int i = 0; i < buffer.getWidth(); i++) {
     for (int j = 0; j < buffer.getHeight(); j++) {
       //Find the associated ray for each pixel
-      Ray ray = computeRayAt(i, j);
+      //Ray ray = computeRayAt(i, j);
 
       //Compute closest intersection with object in scene
       //float intersection = computeClosestIntersection(ray);

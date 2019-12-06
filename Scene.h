@@ -10,6 +10,7 @@
 #include "Sphere.h"
 #include "Ray.h"
 #include "PixelBuffer.h"
+#include "Camera.h"
 
 class Scene {
  public:
@@ -23,8 +24,7 @@ class Scene {
   float computeRayAt(int i, int j, int N, float D) const;
  private:
   std::vector<Sphere> spheres;
-
-  Vector3 eyeLoc;
+  Camera camera;
 };
 
 #endif //HW5_SCENE_H

@@ -18,13 +18,17 @@ class Vector3 {
   }
 
   Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
+  Vector3();
 
-  Vector3 operator-(Vector3 v2);
-  float operator*(Vector3 v2);
-  Vector3 operator*(float s);
+  Vector3 operator-(Vector3 v2) const;
+  Vector3 operator*(float s) const;
+  Vector3 operator/(float s) const;
 
-  Vector3 normalize();
-  float magnitude();
+  Vector3 cross(Vector3 v2) const;
+  float dot(Vector3 v2) const;
+
+  Vector3 normalize() const;
+  float magnitude() const;
 };
 
 #endif //HW5_POINT_H
