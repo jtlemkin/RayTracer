@@ -7,8 +7,8 @@
 Scene::Scene() : eyeLoc(Vector3(1, 1, 1)) {}
 
 void Scene::render() {
-  Ray ray = Ray(0, 0, 0, -1, -1, -1);
-  addSphere(0, 0, 0, 10);
+  Ray ray = Ray(0, 0, 0, 1, 1, 1);
+  addSphere(0, 0, 0, 1);
 
   float t = computeClosestIntersection(ray);
 

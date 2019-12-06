@@ -3,7 +3,7 @@ project(hw5)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_FILES main.cpp Sphere.cpp Sphere.h Vector3.h Ray.cpp Ray.h Scene.cpp Scene.h)
+set(SOURCE_FILES main.cpp Sphere.cpp Sphere.h Vector3.cpp Vector3.h Ray.cpp Ray.h Scene.cpp Scene.h)
 add_executable(hw5 ${SOURCE_FILES})
 
 find_package(OpenGL REQUIRED)
