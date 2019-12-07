@@ -48,8 +48,8 @@ int main(int argc, char **argv) {
   init();
 
   scenePtr = std::make_unique<Scene>();
-  //scenePtr->addSphere(0, 0, 0, 10);
-  scenePtr->addSphere(2, 2, 0.5, 0);
+  scenePtr->addSphere(0, 0, 10, 1);
+  scenePtr->addSphere(5, 5, 15, 1);
 
   //start glut event loop
   glutMainLoop();

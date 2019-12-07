@@ -4,7 +4,7 @@
 
 #include "Camera.h"
 
-Camera::Camera() : fromPoint(0, 0, -3), atPoint(0, 0, 2), upVector(0, 1, 0), viewingAngle(55) {
+Camera::Camera() : fromPoint(0, 0, -3), atPoint(0, 0, 2), upVector(0, 1, 0), viewingAngle(20) {
   //Viewing angle should be less than 90 degrees
 
   nearClippingDepth = -fromPoint.z - 0.5f;

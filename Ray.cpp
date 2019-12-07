@@ -14,7 +14,7 @@ Vector3 Ray::getPointAt(float t) {
   return Vector3(origin.x + t * direction.x, origin.y + t * direction.y, origin.z + t * direction.z);
 }
 
-float Ray::intersect(Sphere sphere) {
+/*float Ray::intersect(Sphere sphere) {
   //a = dx^2 + dy^2 + dz^2
   float a = (direction.x * direction.x) + (direction.y * direction.y) + (direction.z * direction.z);
   //b = 2[(x0 - xc)dx + (y0 - yc)dy + (z0 - zc)dz]
@@ -49,15 +49,15 @@ float Ray::intersect(Sphere sphere) {
     //There's no intersection within the domain of t
     return std::numeric_limits<float>::max();
   }
-}
+}*/
 
-/*float Ray::intersect(Sphere sphere) {
+float Ray::intersect(Sphere sphere) {
   Vector3 dp = sphere.center - origin;
 
   Vector3 u = direction.normalize();
 
-  float a = u * dp;
-  float b = (dp - u * (dp * u)).magnitude();
+  float a = u.dot(dp);
+  float b = (dp - u * (dp.dot(u))).magnitude();
   float c = (sphere.radius * sphere.radius) - (b * b);
 
   //If there is no solution, return the max float value implying that there is no intersection
@@ -83,4 +83,4 @@ float Ray::intersect(Sphere sphere) {
     //There's no intersection within the domain of t
     return std::numeric_limits<float>::max();
   }
-}*/
+}
