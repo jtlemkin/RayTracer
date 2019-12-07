@@ -25,8 +25,6 @@ void mouse(int button, int state, int x, int y);
 void check();
 void reshape(size_t width, size_t height);
 void idle();
-void draw_pix(float x, float y, float r, float g, float b);
-void pix_to_norm(float* x, float* y);
 
 std::unique_ptr<size_t> screen_size;
 
@@ -144,15 +142,3 @@ void check()
     exit(1);
   }
 }
-
-void pix_to_norm(float* x, float* y) {
-  *x = (*x / *screen_size - 0.5f) * 2.0f;
-  *y = -(*y / *screen_size - 0.5f) * 2.0f;
-}
-
-/*void draw_pix(float x, float y, float r, float g, float b){
-  glBegin(GL_POINTS);
-    glColor3f(r, g, b);
-    glVertex3f(pix_to_norm(x), pix_to_norm(y), 0);
-  glEnd();
-}*/
