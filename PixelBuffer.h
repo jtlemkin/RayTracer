@@ -21,6 +21,7 @@
 #endif
 
 #include <memory>
+#include "Color.h"
 
 class PixelBuffer {
  private:
@@ -33,6 +34,8 @@ class PixelBuffer {
   void display() const;
 
   void recordPixel(int i, int j, float r, float g, float b);
+  void recordPixel(int i, int j, Color color);
+
   void fill(float r, float g, float b);
 
   size_t getSize() const;

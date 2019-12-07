@@ -4,11 +4,13 @@
 
 #include "Scene.h"
 
-Scene::Scene() {}
+Scene::Scene() : ambient(0, 0, 0) {}
 
 void Scene::writeToBuffer(PixelBuffer &buffer) {
   for (int i = 0; i < buffer.getSize(); i++) {
     for (int j = 0; j < buffer.getSize(); j++) {
+      Color pixel = ambient;
+
       //Find the associated ray for each pixel
       Ray ray = camera.computeRayAt(i, j, (int) buffer.getSize() - 1);
 
@@ -16,13 +18,16 @@ void Scene::writeToBuffer(PixelBuffer &buffer) {
       auto intersection = computeClosestIntersection(ray);
 
       //Try next pixel if no intersection
-      if (!intersection.has_value()) {
-        continue;
+      if (intersection.has_value()) {
+        const Sphere& intersectedSphere = intersection.value().sphere;
+
+        pixel += intersectedSphere.color;
       }
 
-      buffer.recordPixel(i, j, 0, 0, 0);
+      buffer.recordPixel(i, j, pixel);
 
       //Compute phong color for point
+      //I(p) = Idirect + Iglobal
 
       //Store color in pixel buffer
     }
@@ -50,6 +55,9 @@ std::optional<Intersection> Scene::computeClosestIntersection(const Ray& ray) co
   }
 }
 
-void Scene::addSphere(float x, float y, float z, float radius) {
-  spheres.emplace_back(x, y, z, radius);
+void Scene::addSphere(float x, float y, float z, float radius, float r, float g, float b) {
+  spheres.emplace_back(x, y, z, radius, r, g, b);
+}
+void Scene::setAmbientColor(float r, float g, float b) {
+  ambient = Color(r, g, b);
 }

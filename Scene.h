@@ -18,14 +18,17 @@ class Scene {
  public:
   Scene();
 
-  void addSphere(float x, float y, float z, float radius);
+  void addSphere(float x, float y, float z, float radius, float r, float g, float b);
+  void setAmbientColor(float r, float g, float b);
 
   void writeToBuffer(PixelBuffer& buffer);
 
   std::optional<Intersection> computeClosestIntersection(const Ray& ray) const;
+
  private:
   std::vector<Sphere> spheres;
   Camera camera;
+  Color ambient;
 };
 
 #endif //HW5_SCENE_H
