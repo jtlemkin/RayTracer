@@ -7,10 +7,12 @@
 
 #include <vector>
 #include <iostream>
+#include <optional>
 #include "Sphere.h"
 #include "Ray.h"
 #include "PixelBuffer.h"
 #include "Camera.h"
+#include "Intersection.h"
 
 class Scene {
  public:
@@ -20,7 +22,7 @@ class Scene {
 
   void writeToBuffer(PixelBuffer& buffer);
 
-  float computeClosestIntersection(Ray ray) const;
+  std::optional<Intersection> computeClosestIntersection(const Ray& ray) const;
  private:
   std::vector<Sphere> spheres;
   Camera camera;

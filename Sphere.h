@@ -13,6 +13,8 @@ class Sphere {
   float radius;
 
   Sphere(float x, float y, float z, float radius);
+
+  Vector3 getNormalAt(const Vector3& point) const;
 };
 
 #endif //HW5_SPHERE_H
