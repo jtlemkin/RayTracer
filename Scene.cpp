@@ -13,7 +13,11 @@ void Scene::writeToBuffer(PixelBuffer &buffer) {
       Ray ray = camera.computeRayAt(i, j, (int) buffer.getWidth() - 1);
 
       //Compute closest intersection with object in scene
-      //float intersection = computeClosestIntersection(ray);
+      float intersection = computeClosestIntersection(ray);
+
+      if (intersection < std::numeric_limits<float>::max()) {
+        buffer.recordPixel(i, j, 0, 0, 0);
+      }
 
       //Compute phong color for point
 
@@ -28,7 +32,9 @@ float Scene::computeClosestIntersection(Ray ray) const {
   for (const auto& sphere : spheres) {
     float intersection = ray.intersect(sphere);
 
-    closest = intersection < closest ? intersection : closest;
+    if (intersection < closest) {
+      closest = intersection;
+    }
   }
 
   return closest;

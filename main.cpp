@@ -28,8 +28,8 @@ void idle();
 void draw_pix(float x, float y, float r, float g, float b);
 void pix_to_norm(float* x, float* y);
 
-size_t screen_width = 400;
-size_t screen_height = 400;
+size_t screen_width = 200;
+size_t screen_height = 200;
 
 int main(int argc, char **argv) {
   glutInit(&argc, argv);
@@ -47,6 +47,8 @@ int main(int argc, char **argv) {
   init();
 
   scenePtr = std::make_unique<Scene>();
+  //scenePtr->addSphere(0, 0, 0, 10);
+  scenePtr->addSphere(2, 2, 0.5, 0);
 
   //start glut event loop
   glutMainLoop();
