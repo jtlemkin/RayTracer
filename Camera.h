@@ -7,6 +7,8 @@
 
 #include "Vector3.h"
 
+#define PI 3.14159265
+
 class Camera {
  private:
   Vector3 fromPoint;
@@ -16,6 +18,9 @@ class Camera {
   float viewingAngle;
   float nearClippingDepth;
   float farClippingDepth;
+
+  //distance from screen
+  float D;
 
   //basis vectors
   Vector3 b1;
