@@ -64,3 +64,4 @@ void Scene::addSphere(float x, float y, float z, float radius, float r, float g,
 void Scene::setAmbientColor(float r, float g, float b) {
   ambient = Color(r, g, b);
 }
+

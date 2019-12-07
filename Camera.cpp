@@ -12,9 +12,7 @@ Camera::Camera() : fromPoint(0, 0, -3), atPoint(0, 0, 2), upVector(0, 1, 0), vie
 
   D = 1 / (2.0f * (float) std::tan(viewingAngle * PI / 180));
 
-  b3 = (atPoint - fromPoint).normalize();
-  b1 = b3.cross(upVector).normalize();
-  b2 = b1.cross(b3);
+  computeBasisVectors();
 }
 
 Ray Camera::computeRayAt(int i, int j, int N) {
@@ -32,4 +30,40 @@ Ray Camera::computeRayAt(int i, int j, int N) {
 }
 const Vector3 &Camera::getFromPoint() const {
   return fromPoint;
+}
+
+void Camera::moveRight() {
+  Vector3 dir(0.1f, 0 , 0);
+
+  fromPoint += dir;
+
+  computeBasisVectors();
+}
+
+void Camera::moveLeft() {
+  Vector3 dir(-0.1f, 0 , 0);
+
+  fromPoint += dir;
+
+  computeBasisVectors();
+}
+
+void Camera::moveUp() {
+  Vector3 dir(0, 0.1f , 0);
+
+  fromPoint += dir;
+
+  computeBasisVectors();
+}
+void Camera::moveDown() {
+  Vector3 dir(0, -0.1f , 0);
+
+  fromPoint += dir;
+
+  computeBasisVectors();
+}
+void Camera::computeBasisVectors() {
+  b3 = (atPoint - fromPoint).normalize();
+  b1 = b3.cross(upVector).normalize();
+  b2 = b1.cross(b3);
 }

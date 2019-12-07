@@ -16,6 +16,8 @@
 
 class Scene {
  public:
+  Camera camera;
+
   Scene();
 
   void addSphere(float x, float y, float z, float radius, float r, float g, float b);
@@ -27,7 +29,6 @@ class Scene {
 
  private:
   std::vector<Sphere> spheres;
-  Camera camera;
   Color ambient;
   Light light;
 };

@@ -28,12 +28,19 @@ class Camera {
   Vector3 b2;
   Vector3 b3;
 
+  void computeBasisVectors();
+
  public:
   Camera();
 
   Ray computeRayAt(int i, int j, int N);
 
   const Vector3 &getFromPoint() const;
+
+  void moveRight();
+  void moveLeft();
+  void moveUp();
+  void moveDown();
 };
 
 #endif //HW5_CAMERA_H

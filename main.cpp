@@ -25,6 +25,7 @@ void mouse(int button, int state, int x, int y);
 void check();
 void reshape(size_t width, size_t height);
 void idle();
+void arrowkey(int key, int x, int y);
 
 std::unique_ptr<size_t> screen_size;
 
@@ -43,6 +44,7 @@ int main(int argc, char **argv) {
   glutMouseFunc(mouse);     //mouse button events
   glutKeyboardFunc(key);    //Keyboard events
   //glutIdleFunc(idle);       //Function called while program is sitting "idle"
+  glutSpecialFunc(arrowkey);
 
   //initialize opengl variables
   init();
@@ -121,6 +123,27 @@ void display() {
 void key(unsigned char ch, int x, int y)
 {
   //redraw the scene after keyboard input
+  glutPostRedisplay();
+}
+
+void arrowkey(int key, int x, int y) {
+  switch(key) {
+    case GLUT_KEY_RIGHT:
+      scenePtr->camera.moveRight();
+      break;
+    case GLUT_KEY_LEFT:
+      scenePtr->camera.moveLeft();
+      break;
+    case GLUT_KEY_UP:
+      scenePtr->camera.moveUp();
+      break;
+    case GLUT_KEY_DOWN:
+      scenePtr->camera.moveDown();
+      break;
+    default:
+      break;
+  }
+
   glutPostRedisplay();
 }
 
