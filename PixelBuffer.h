@@ -21,24 +21,29 @@
 #endif
 
 #include <memory>
+#include <algorithm>
 #include "Color.h"
 
 class PixelBuffer {
  private:
   size_t size;
   float* buffer;
+
+  float maxIntensity;
+
+  void updateMaxIntensity(float r, float g, float b);
  public:
   virtual ~PixelBuffer();
-  PixelBuffer(size_t size);
+  explicit PixelBuffer(size_t size);
 
-  void display() const;
+  void display();
 
-  void recordPixel(int i, int j, float r, float g, float b);
-  void recordPixel(int i, int j, Color color);
+  void recordPixel(int i, int j, const Color& color);
 
   void fill(float r, float g, float b);
 
   size_t getSize() const;
+  void normalizePixels();
 };
 
 #endif //HW5_PIXELBUFFER_H

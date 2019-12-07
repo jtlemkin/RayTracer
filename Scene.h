@@ -29,6 +29,7 @@ class Scene {
   std::vector<Sphere> spheres;
   Camera camera;
   Color ambient;
+  Light light;
 };
 
 #endif //HW5_SCENE_H

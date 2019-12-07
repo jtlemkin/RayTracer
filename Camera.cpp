@@ -26,7 +26,10 @@ Ray Camera::computeRayAt(int i, int j, int N) {
 
   Vector3 pixWorldPos = Vector3(pixWorldX, pixWorldY, pixWorldZ);
 
-  Vector3 rayDir = pixWorldPos - fromPoint;
+  Vector3 rayDir = (pixWorldPos - fromPoint).normalize();
 
   return Ray(pixWorldPos, rayDir);
+}
+const Vector3 &Camera::getFromPoint() const {
+  return fromPoint;
 }

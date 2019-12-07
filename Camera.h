@@ -32,6 +32,8 @@ class Camera {
   Camera();
 
   Ray computeRayAt(int i, int j, int N);
+
+  const Vector3 &getFromPoint() const;
 };
 
 #endif //HW5_CAMERA_H

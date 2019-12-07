@@ -27,7 +27,16 @@ Vector3 Vector3::operator*(float s) const {
 Vector3 Vector3::operator/(float s) const {
   return Vector3(x / s, y / s, z /s);
 }
+
 Vector3 Vector3::cross(Vector3 v2) const {
   return Vector3(y * v2.z - z * v2.y, z * v2.x - x * v2.z, x * v2.y - y * v2.x);
+}
+
+Vector3 Vector3::operator-() const {
+  return Vector3(-x, -y, -z);
+}
+
+Vector3 Vector3::operator+(Vector3 v2) const {
+  return Vector3(x + v2.x, y + v2.y, z + v2.z);
 }
 

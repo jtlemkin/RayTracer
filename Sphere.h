@@ -7,16 +7,20 @@
 
 #include "Vector3.h"
 #include "Color.h"
+#include "Light.h"
 
 class Sphere {
  public:
   Vector3 center;
   float radius;
   Color color;
+  float specularity;
 
-  Sphere(float x, float y, float z, float radius, float r, float g, float b);
+  Sphere(float x, float y, float z, float radius, float r, float g, float b, float specularity);
 
-  Vector3 getNormalAt(const Vector3& point) const;
+  Color computeColorAt(const Vector3 &point, const Vector3& cameraPos, Light& light, float k) const;
+ private:
+  Vector3 computeNormalAt(const Vector3 &point) const;
 };
 
 #endif //HW5_SPHERE_H

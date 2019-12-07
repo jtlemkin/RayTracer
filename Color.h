@@ -12,6 +12,8 @@ class Color {
   Color(float r, float g, float b);
 
   void operator+=(const Color& c2);
+  Color operator+(const Color& c2);
+  Color operator*(float n) const;
 };
 
 #endif //HW5_COLOR_H
