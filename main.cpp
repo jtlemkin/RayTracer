@@ -28,13 +28,16 @@ void idle();
 void draw_pix(float x, float y, float r, float g, float b);
 void pix_to_norm(float* x, float* y);
 
-size_t screen_width = 200;
-size_t screen_height = 200;
+std::unique_ptr<size_t> screen_size;
 
 int main(int argc, char **argv) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-  glutInitWindowSize(screen_width, screen_height);
+
+  const std::string size(argv[1]);
+  screen_size = std::make_unique<size_t>(std::stoi(size));
+
+  glutInitWindowSize((int) *screen_size, (int) *screen_size);
   glutCreateWindow("Project 2");
 
   /*defined glut callback functions*/
@@ -69,8 +72,7 @@ void init()
 void reshape(size_t width, size_t height) {
   /*set up projection matrix to define the view port*/
   //update the ne window width and height
-  screen_width = width;
-  screen_height = height;
+  *screen_size = width;
 
   //creates a rendering area across the window
   glViewport(0,0,width,height);
@@ -78,7 +80,7 @@ void reshape(size_t width, size_t height) {
   // the pixel space is mapped to the grid space
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(0,screen_width,0,screen_height,-10,10);
+  glOrtho(0,*screen_size,0,*screen_size,-10,10);
 
   //clear the modelview matrix
   glMatrixMode(GL_MODELVIEW);
@@ -103,7 +105,7 @@ void display() {
   //clears the opengl Modelview transformation matrix
   glLoadIdentity();
 
-  PixelBuffer pb(screen_width, screen_height);
+  PixelBuffer pb(*screen_size);
   pb.fill(1, 1, 1);
 
   scenePtr->writeToBuffer(pb);
@@ -144,8 +146,8 @@ void check()
 }
 
 void pix_to_norm(float* x, float* y) {
-  *x = (*x / screen_width - 0.5f) * 2.0f;
-  *y = -(*y / screen_width - 0.5f) * 2.0f;
+  *x = (*x / *screen_size - 0.5f) * 2.0f;
+  *y = -(*y / *screen_size - 0.5f) * 2.0f;
 }
 
 /*void draw_pix(float x, float y, float r, float g, float b){

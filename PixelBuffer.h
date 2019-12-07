@@ -24,19 +24,18 @@
 
 class PixelBuffer {
  private:
-  size_t width, height;
+  size_t size;
   float* buffer;
  public:
   virtual ~PixelBuffer();
-  PixelBuffer(size_t width, size_t height);
+  PixelBuffer(size_t size);
 
   void display() const;
 
   void recordPixel(int i, int j, float r, float g, float b);
   void fill(float r, float g, float b);
 
-  size_t getWidth() const;
-  size_t getHeight() const;
+  size_t getSize() const;
 };
 
 #endif //HW5_PIXELBUFFER_H
