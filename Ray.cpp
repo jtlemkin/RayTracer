@@ -8,6 +8,8 @@ Ray::Ray(float x, float y, float z, float dx, float dy, float dz) : origin(Vecto
                                                                     direction(Vector3(dx, dy, dz)) {
 }
 
+Ray::Ray(const Vector3 &origin, const Vector3 &direction) : origin(origin), direction(direction) {}
+
 Vector3 Ray::getPointAt(float t) {
   return Vector3(origin.x + t * direction.x, origin.y + t * direction.y, origin.z + t * direction.z);
 }

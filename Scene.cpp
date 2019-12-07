@@ -10,7 +10,7 @@ void Scene::writeToBuffer(PixelBuffer &buffer) {
   for (int i = 0; i < buffer.getWidth(); i++) {
     for (int j = 0; j < buffer.getHeight(); j++) {
       //Find the associated ray for each pixel
-      //Ray ray = computeRayAt(i, j);
+      Ray ray = camera.computeRayAt(i, j, (int) buffer.getWidth() - 1);
 
       //Compute closest intersection with object in scene
       //float intersection = computeClosestIntersection(ray);
@@ -36,10 +36,4 @@ float Scene::computeClosestIntersection(Ray ray) const {
 
 void Scene::addSphere(float x, float y, float z, float radius) {
   spheres.emplace_back(x, y, z, radius);
-}
-
-float Scene::computeRayAt(int i, int j, int N, float D) const {
-  Vector3 pEye = Vector3((float) i / (float) N - 0.5f, (float) j / (float) N - 0.5f, D);
-
-  return 0;
 }

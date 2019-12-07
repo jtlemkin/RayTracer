@@ -6,6 +6,7 @@
 #define HW5_CAMERA_H
 
 #include "Vector3.h"
+#include "Ray.h"
 
 #define PI 3.14159265
 
@@ -29,6 +30,8 @@ class Camera {
 
  public:
   Camera();
+
+  Ray computeRayAt(int i, int j, int N);
 };
 
 #endif //HW5_CAMERA_H

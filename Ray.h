@@ -17,6 +17,7 @@ class Ray {
 
  public:
   Ray(float x, float y, float z, float dx, float dy, float dz);
+  Ray(const Vector3 &origin, const Vector3 &direction);
 
   Vector3 getPointAt(float t);
   float intersect(Sphere sphere);
