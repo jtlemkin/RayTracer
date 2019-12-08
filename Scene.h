@@ -20,8 +20,8 @@ class Scene {
 
   Scene();
 
-  void addSphere(float x, float y, float z, float radius, float r, float g, float b);
-  void addLight(float x, float y, float z, float intensity, float r, float g, float b);
+  void addSphere(double x, double y, double z, double radius, float r, float g, float b);
+  void addLight(double x, double y, double z, float intensity, float r, float g, float b);
   void setAmbientColor(float r, float g, float b);
 
   void writeToBuffer(PixelBuffer& buffer);

@@ -16,11 +16,12 @@ class Ray {
   Vector3 direction;
 
  public:
-  Ray(float x, float y, float z, float dx, float dy, float dz);
+  Ray(double x, double y, double z, double dx, double dy, double dz);
   Ray(const Vector3 &origin, const Vector3 &direction);
 
-  Vector3 getPointAt(float t) const;
-  float intersect(const Sphere& sphere) const;
+  Vector3 getPointAt(double t) const;
+  double intersect(const Sphere& sphere) const;
+  double intersect(double z) const;
 };
 
 #endif //HW5_RAY_H

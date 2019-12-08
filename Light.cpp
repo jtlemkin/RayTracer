@@ -3,5 +3,6 @@
 //
 
 #include "Light.h"
-Light::Light(float x, float y, float z, float intensity, float r, float g, float b) : pos(Vector3(x, y, z)), intensity(intensity),
-                                                                                      color(Color(r, g, b)) {}
+Light::Light(double x, double y, double z, float intensity, float r, float g, float b) : pos(Vector3(x, y, z)),
+                                                                                         intensity(intensity),
+                                                                                         color(Color(r, g, b)) {}

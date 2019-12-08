@@ -3,12 +3,12 @@
 Vector3::Vector3() : x(0), y(0), z(0) {}
 
 Vector3 Vector3::normalize() const {
-  float mag = magnitude();
+  double mag = magnitude();
 
   return Vector3(x / mag, y / mag, z / mag);
 }
 
-float Vector3::magnitude() const {
+double Vector3::magnitude() const {
   return std::sqrt(x * x + y * y + z * z);
 }
 
@@ -16,15 +16,15 @@ Vector3 Vector3::operator-(Vector3 v2) const {
   return Vector3(x - v2.x, y - v2.y, z - v2.z);
 }
 
-float Vector3::dot(Vector3 v2) const {
+double Vector3::dot(Vector3 v2) const {
   return x * v2.x + y * v2.y + z * v2.z;
 }
 
-Vector3 Vector3::operator*(float s) const {
+Vector3 Vector3::operator*(double s) const {
   return Vector3(x * s, y * s, z * s);
 }
 
-Vector3 Vector3::operator/(float s) const {
+Vector3 Vector3::operator/(double s) const {
   return Vector3(x / s, y / s, z /s);
 }
 

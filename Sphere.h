@@ -13,13 +13,13 @@
 class Sphere {
  public:
   Vector3 center;
-  float radius;
+  double radius;
   Color color;
   float specularity;
 
-  Sphere(float x, float y, float z, float radius, float r, float g, float b, float specularity);
+  Sphere(double x, double y, double z, double radius, float r, float g, float b, float specularity);
 
-  Color computeColorAt(const Vector3 &point, const Vector3& cameraPos, std::vector<Light>& lights, float k) const;
+  Color computeColorAt(const Vector3 &point, const Vector3& cameraPos, const Light& light, float k) const;
  private:
   Vector3 computeNormalAt(const Vector3 &point) const;
 };

@@ -14,7 +14,7 @@ class Light {
   float intensity;
   Color color;
 
-  Light(float x, float y, float z, float intensity, float r, float g, float b);
+  Light(double x, double y, double z, float intensity, float r, float g, float b);
 };
 
 #endif //HW5_LIGHT_H

@@ -16,18 +16,18 @@ class Camera {
   Vector3 atPoint;
   Vector3 upVector;
 
-  float viewingAngle;
-  float nearClippingDepth;
-  float farClippingDepth;
+  double viewingAngle;
+  double nearClippingDepth;
+  double farClippingDepth;
 
   //distance from screen
-  float D;
+  double D;
 
   //basis vectors
   Vector3 b1;
   Vector3 b2;
   Vector3 b3;
-
+  
   void computeBasisVectors();
 
  public:
