@@ -1,17 +1,11 @@
 //
-// Created by James Lemkin on 12/5/19.
+// Created by James Lemkin on 12/7/19.
 //
 
 #include "Sphere.h"
+#include "Object.h"
 
-Sphere::Sphere(double x, double y, double z, double radius, float r, float g, float b, float specularity = 10) :
-    center(Vector3(x, y, z)), radius(radius), color(r, g, b), specularity(specularity) {}
-
-Vector3 Sphere::computeNormalAt(const Vector3 &point) const {
-  return Vector3(2 * (point.x - center.x), 2 * (point.y - center.y), 2 * (point.z - center.z)).normalize();
-}
-
-Color Sphere::computeColorAt(const Vector3 &point, const Vector3& cameraPos, const Light& light, float k) const {
+Color Object::computeColorAt(const Vector3 &point, const Vector3& cameraPos, const Light& light, float k) const {
   Color colorAtPoint(0, 0, 0);
 
   Vector3 normal = computeNormalAt(point);
@@ -41,3 +35,6 @@ Color Sphere::computeColorAt(const Vector3 &point, const Vector3& cameraPos, con
   return colorAtPoint;
 }
 
+Object::Object(float r, float g, float b, float specularity = 1) : color(r, g, b) {
+
+}

@@ -7,7 +7,7 @@
 
 #include <cmath>
 #include "Vector3.h"
-#include "Sphere.h"
+#include "Objects/Sphere.h"
 
 class Ray {
  private:

@@ -8,7 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <optional>
-#include "Sphere.h"
+#include "Objects/Sphere.h"
 #include "Ray.h"
 #include "PixelBuffer.h"
 #include "Camera.h"

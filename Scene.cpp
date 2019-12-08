@@ -3,6 +3,7 @@
 //
 
 #include "Scene.h"
+#include "Objects/Object.h"
 
 Scene::Scene() : ambient(0, 0, 0) {}
 

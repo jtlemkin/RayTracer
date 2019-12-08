@@ -5,7 +5,7 @@
 #ifndef HW5_INTERSECTION_H
 #define HW5_INTERSECTION_H
 
-#include "Sphere.h"
+#include "Objects/Sphere.h"
 
 class Intersection {
  public:
