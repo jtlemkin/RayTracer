@@ -56,6 +56,8 @@ int main(int argc, char **argv) {
   scenePtr->addSphere(0, 0, 10, 1, 1, 1, 0);
   scenePtr->addSphere(2, 2, 8, 0.3, 1, 1, 1);
   //scenePtr->addSphere(0, 5, 17, 1, 1, 1, 1);
+  scenePtr->addPlane(0, 1, 0, 1, 1, 0, 0, 1);
+  scenePtr->addPlane(1, 0, 0, 2, 1, 0, 1, 1);
 
   //start glut event loop
   glutMainLoop();

@@ -3,4 +3,4 @@
 //
 
 #include "Intersection.h"
-Intersection::Intersection(const Sphere &sphere, double t) : sphere(sphere), t(t) {}
+Intersection::Intersection(const Object &object, double t) : object(object), t(t) {}

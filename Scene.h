@@ -13,6 +13,7 @@
 #include "PixelBuffer.h"
 #include "Camera.h"
 #include "Intersection.h"
+#include "Objects/Plane.h"
 
 class Scene {
  public:
@@ -21,6 +22,7 @@ class Scene {
   Scene();
 
   void addSphere(double x, double y, double z, double radius, float r, float g, float b);
+  void addPlane(double A, double B, double C, double D, float r, float g, float b, float specularity);
   void addLight(double x, double y, double z, float intensity, float r, float g, float b);
   void setAmbientColor(float r, float g, float b);
 
@@ -29,7 +31,7 @@ class Scene {
   std::optional<Intersection> computeClosestIntersection(const Ray& ray) const;
 
  private:
-  std::vector<Sphere> spheres;
+  std::vector<std::unique_ptr<Object>> objects;
   std::vector<Light> lights;
   Color ambient;
 };

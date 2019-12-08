@@ -5,8 +5,17 @@
 #ifndef HW5_PLANE_H
 #define HW5_PLANE_H
 
-class Plane {
+#include "Object.h"
 
+class Plane : public Object {
+ public:
+  double A, B, C, D;
+
+  Plane(double A, double B, double C, double D, float r, float g, float b, float specularity);
+
+  Vector3 computeNormalAt(const Vector3 &point) const override;
+
+  double intersect(Ray ray) const override;
 };
 
 #endif //HW5_PLANE_H

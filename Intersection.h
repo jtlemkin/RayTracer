@@ -9,10 +9,10 @@
 
 class Intersection {
  public:
-  const Sphere& sphere;
+  const Object& object;
   double t;
 
-  Intersection(const Sphere &sphere, double t);
+  Intersection(const Object &sphere, double t);
 };
 
 #endif //HW5_INTERSECTION_H

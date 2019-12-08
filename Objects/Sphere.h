@@ -17,6 +17,8 @@ class Sphere : public Object {
   Sphere(double x, double y, double z, double radius, float r, float g, float b, float specularity);
 
   Vector3 computeNormalAt(const Vector3 &point) const override;
+
+  double intersect(Ray ray) const override;
 };
 
 #endif //HW5_SPHERE_H
