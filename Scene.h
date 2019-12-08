@@ -21,6 +21,7 @@ class Scene {
   Scene();
 
   void addSphere(float x, float y, float z, float radius, float r, float g, float b);
+  void addLight(float x, float y, float z, float intensity, float r, float g, float b);
   void setAmbientColor(float r, float g, float b);
 
   void writeToBuffer(PixelBuffer& buffer);
@@ -29,8 +30,8 @@ class Scene {
 
  private:
   std::vector<Sphere> spheres;
+  std::vector<Light> lights;
   Color ambient;
-  Light light;
 };
 
 #endif //HW5_SCENE_H

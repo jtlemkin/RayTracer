@@ -11,14 +11,13 @@ Vector3 Sphere::computeNormalAt(const Vector3 &point) const {
   return Vector3(2 * (point.x - center.x), 2 * (point.y - center.y), 2 * (point.z - center.z)).normalize();
 }
 
-Color Sphere::computeColorAt(const Vector3 &point, const Vector3& cameraPos, Light& light, float k) const {
-
+Color Sphere::computeColorAt(const Vector3 &point, const Vector3& cameraPos, std::vector<Light>& lights, float k) const {
   Color colorAtPoint(0, 0, 0);
 
   Vector3 normal = computeNormalAt(point);
   Vector3 view = (cameraPos - point).normalize();
 
-  //for (const auto& light : lights) {
+  for (const auto& light : lights) {
     float lightIntensityAtPoint = light.intensity / (view.magnitude() + k);
 
     Vector3 lightVector = (light.pos - point).normalize();
@@ -39,7 +38,7 @@ Color Sphere::computeColorAt(const Vector3 &point, const Vector3& cameraPos, Lig
     }
 
     colorAtPoint += (diffuseColor + specularColor) * lightIntensityAtPoint;
-  //}
+  }
 
   return colorAtPoint;
 }

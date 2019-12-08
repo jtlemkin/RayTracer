@@ -4,7 +4,7 @@
 
 #include "Scene.h"
 
-Scene::Scene() : ambient(0, 0, 0), light(10, 5, 0, 10, 0.25, 0.25, 0.25) {}
+Scene::Scene() : ambient(0, 0, 0) {}
 
 void Scene::writeToBuffer(PixelBuffer &buffer) {
   for (int i = 0; i < buffer.getSize(); i++) {
@@ -24,7 +24,7 @@ void Scene::writeToBuffer(PixelBuffer &buffer) {
 
         Vector3 intersectionPoint = ray.getPointAt(t);
 
-        pixel += intersectedSphere.computeColorAt(intersectionPoint, camera.getFromPoint(), light, 5);
+        pixel += intersectedSphere.computeColorAt(intersectionPoint, camera.getFromPoint(), lights, 5);
       }
 
       buffer.recordPixel(i, j, pixel);
@@ -63,5 +63,8 @@ void Scene::addSphere(float x, float y, float z, float radius, float r, float g,
 }
 void Scene::setAmbientColor(float r, float g, float b) {
   ambient = Color(r, g, b);
+}
+void Scene::addLight(float x, float y, float z, float intensity, float r, float g, float b) {
+  lights.emplace_back(x, y, z, intensity, r, g, b);
 }
 
