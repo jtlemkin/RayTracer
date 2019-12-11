@@ -1,0 +1,9 @@
+Compile with 'cmake CMakeLists.txt' and then 'make' and run the executable hw5 with the number of pixels you'd like
+the width of the screen to be.
+
+I implemented, the camera viewing model, intersections with spheres and planes, refraction, and reflection. I'm not
+entirely sure what the requirements are, but if I went above and beyond it I could really use the extra credit :)
+
+The file RayTracedImage is a png of scene produced by the program.
+
+Thanks a lot for a great quarter!

@@ -179,30 +179,6 @@ Color Scene::computeRefractedColor(const Intersection& intersection, const Ray& 
     }
 
     return Color(0, 0, 0);
-
-    /*if (intersection.numIntersections == 1 && ray.mediumIndex == 1) {
-      Ray transmissionRay = Ray(intersectionPoint, ray.direction);
-
-      refractedColor = computeRayColor(transmissionRay, level + 1);
-    } else if (intersection.numIntersections == 1 && ray.mediumIndex != 1 && ray.mediumIndex * sin(view.angleWith(normal)) <= 1) {
-      Vector3 horizontalVector = (-view + normal * normal.dot(view)).normalize();
-
-      double transmissionAngle = asin(ray.mediumIndex * sin(view.angleWith(normal)));
-      Vector3 transmissionVector = (horizontalVector * sin(transmissionAngle) + normal * cos(transmissionAngle)).normalize();
-      Ray transmissionRay = Ray(intersectionPoint, transmissionVector);
-      transmissionRay.mediumIndex = 1;
-
-      refractedColor += computeRayColor(transmissionRay, level + 1);
-    } else if (intersection.numIntersections == 2) {
-      Vector3 horizontalVector = (-view + normal * normal.dot(view)).normalize();
-
-      double transmissionAngle = asin(1 / intersection.object.indexOfRefraction * sin(view.angleWith(normal)));
-      Vector3 transmissionVector = (horizontalVector * sin(transmissionAngle) - normal * cos(transmissionAngle)).normalize();
-      Ray transmissionRay = Ray(intersectionPoint, transmissionVector);
-      transmissionRay.mediumIndex = intersection.object.indexOfRefraction;
-
-      refractedColor = computeRayColor(transmissionRay, level + 1);
-    }*/
   }
 
   return refractedColor;
