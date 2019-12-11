@@ -119,7 +119,7 @@ Color Scene::computeRayColor(const Ray& ray, int level) const {
 
       if (isIlluminated) {
         //This check is to make sure that we don't double count the color of an object while it's leaving the object
-        if (ray.mediumIndex == 1) {
+        if (intersectedObj.indexOfRefraction == -1) {
           if (lightRayIntersection.has_value() && lightRayIntersection.value().numIntersections == 2) {
             rayColor += computeDirectIllumination(lightVector, normal, reflectionVector, view, intersectedObj.color, light) * 0.5;
           } else {
@@ -132,7 +132,7 @@ Color Scene::computeRayColor(const Ray& ray, int level) const {
 
         rayColor += computeRayColor(reflRay, level + 1) * 0.05;
 
-        rayColor += computeRefractedColor(intersection.value(), ray, level, view, normal) * 0.05;
+        rayColor += computeRefractedColor(intersection.value(), ray, level, view, normal) * 0.5;
       }
     }
 
@@ -151,7 +151,36 @@ Color Scene::computeRefractedColor(const Intersection& intersection, const Ray& 
   auto intersectionPoint = ray.getPointAt(intersection.t);
 
   if (intersection.object.indexOfRefraction != -1) {
-    if (intersection.numIntersections == 1 && ray.mediumIndex == 1) {
+    Vector3 horizontalVector = (-view + normal * normal.dot(view)).normalize();
+
+    double transmissionAngle = asin(1 / intersection.object.indexOfRefraction * sin(view.angleWith(normal)));
+    Vector3 transmissionVector = (horizontalVector * sin(transmissionAngle) - normal * cos(transmissionAngle)).normalize();
+    Ray transmissionRay = Ray(intersectionPoint, transmissionVector);
+
+    auto insideIntersection = intersection.object.intersect(transmissionRay);
+
+    if (insideIntersection.has_value()) {
+      Vector3 exitPoint = transmissionRay.getPointAt(insideIntersection.value().t);
+
+      Vector3 insideNormal = -intersection.object.computeNormalAt(exitPoint);
+      Vector3 insideHorizontal = (-transmissionVector + insideNormal * insideNormal.dot(transmissionVector)).normalize();
+
+      double insideTransmissionAngle = asin(intersection.object.indexOfRefraction
+                                                * sin(transmissionVector.angleWith(insideNormal)));
+
+      Vector3 insideTransmissionVector = (insideHorizontal * sin(insideTransmissionAngle) - insideNormal
+          * cos(insideTransmissionAngle)).normalize();
+
+      Ray insideTransmissionRay = Ray(exitPoint, insideTransmissionVector);
+
+      return computeRayColor(insideTransmissionRay, level + 1);
+    } else {
+      std::cout << "catastrophic error\n";
+    }
+
+    return Color(0, 0, 0);
+
+    /*if (intersection.numIntersections == 1 && ray.mediumIndex == 1) {
       Ray transmissionRay = Ray(intersectionPoint, ray.direction);
 
       refractedColor = computeRayColor(transmissionRay, level + 1);
@@ -173,7 +202,7 @@ Color Scene::computeRefractedColor(const Intersection& intersection, const Ray& 
       transmissionRay.mediumIndex = intersection.object.indexOfRefraction;
 
       refractedColor = computeRayColor(transmissionRay, level + 1);
-    }
+    }*/
   }
 
   return refractedColor;

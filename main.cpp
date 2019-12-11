@@ -53,11 +53,11 @@ int main(int argc, char **argv) {
   scenePtr->setAmbientColor(0, 0, 0);
   scenePtr->addLight(4, 4, 6, 100, 1, 1, 1);
   scenePtr->addLight(1.5, -1, 0, 50, 1, 1, 1);
-  scenePtr->addSphere(0, 0, 10, 1, 0, 1, 0, 1.31);
-  scenePtr->addSphere(2, 2, 8, 0.3, 1, 1, 1, 1.32);
-  scenePtr->addSphere(1.5, -1, 3.5, 0.2, 1, 0, 1, 2.42);
-  scenePtr->addPlane(0, 1, 0, 2, 1, 0, 0, 1, 1);
-  scenePtr->addPlane(1, 0, 0, 2, 1, 1, 1, 1, 1);
+  scenePtr->addSphere(0, 0, 10, 1, 0, 1, 0, -1);
+  scenePtr->addSphere(2, 2, 8, 0.3, 1, 1, 1, -1);
+  scenePtr->addSphere(1.5, -1, 3.5, 0.6, 1, 0, 1, 1.33);
+  scenePtr->addPlane(0, 1, 0, 2, 1, 0, 0, 1, -1);
+  scenePtr->addPlane(1, 0, 0, 2, 1, 1, 1, 1, -1);
   scenePtr->addPlane(0, 0, -1, 15, 1, 1, 0, 0, -1);
   //scenePtr->addPlane(0, 0, -1, 10, 1, 1, 1, 1, 1);
 
