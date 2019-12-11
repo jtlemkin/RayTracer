@@ -14,11 +14,12 @@ class Sphere : public Object {
   Vector3 center;
   double radius;
 
-  Sphere(double x, double y, double z, double radius, float r, float g, float b, float specularity);
+  Sphere(double x, double y, double z, double radius, float r, float g, float b, float specularity,
+         float indexOfRefraction);
 
   Vector3 computeNormalAt(const Vector3 &point) const override;
 
-  double intersect(Ray ray) const override;
+  std::optional<Intersection> intersect(Ray ray) const override;
 };
 
 #endif //HW5_SPHERE_H

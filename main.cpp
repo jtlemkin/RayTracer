@@ -51,13 +51,15 @@ int main(int argc, char **argv) {
 
   scenePtr = std::make_unique<Scene>();
   scenePtr->setAmbientColor(0, 0, 0);
-  scenePtr->addLight(4, 4, 6, 10, 0.25, 0.25, 0.25);
-  //scenePtr->addLight(0, -5, 0, 3, 0.25, 0.25, 0.25);
-  scenePtr->addSphere(0, 0, 10, 1, 1, 1, 0);
-  scenePtr->addSphere(2, 2, 8, 0.3, 1, 1, 1);
-  //scenePtr->addSphere(0, 5, 17, 1, 1, 1, 1);
-  scenePtr->addPlane(0, 1, 0, 1, 1, 0, 0, 1);
-  scenePtr->addPlane(1, 0, 0, 2, 1, 0, 1, 1);
+  scenePtr->addLight(4, 4, 6, 100, 1, 1, 1);
+  scenePtr->addLight(1.5, -1, 0, 50, 1, 1, 1);
+  scenePtr->addSphere(0, 0, 10, 1, 0, 1, 0, 1.31);
+  scenePtr->addSphere(2, 2, 8, 0.3, 1, 1, 1, 1.32);
+  scenePtr->addSphere(1.5, -1, 3.5, 0.2, 1, 0, 1, 2.42);
+  scenePtr->addPlane(0, 1, 0, 2, 1, 0, 0, 1, 1);
+  scenePtr->addPlane(1, 0, 0, 2, 1, 1, 1, 1, 1);
+  scenePtr->addPlane(0, 0, -1, 15, 1, 1, 0, 0, -1);
+  //scenePtr->addPlane(0, 0, -1, 10, 1, 1, 1, 1, 1);
 
   //start glut event loop
   glutMainLoop();

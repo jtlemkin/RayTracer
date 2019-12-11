@@ -29,6 +29,7 @@ class Vector3 {
 
   Vector3 cross(Vector3 v2) const;
   double dot(Vector3 v2) const;
+  double angleWith(Vector3 v2) const;
 
   Vector3 normalize() const;
   double magnitude() const;

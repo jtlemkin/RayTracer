@@ -13,6 +13,8 @@ class Ray {
   Vector3 origin;
   Vector3 direction;
 
+  double mediumIndex;
+
   Ray(double x, double y, double z, double dx, double dy, double dz);
   Ray(const Vector3 &origin, const Vector3 &direction);
 

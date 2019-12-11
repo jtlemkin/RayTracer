@@ -35,6 +35,7 @@ Color Object::computeColorAt(const Vector3 &point, const Vector3& cameraPos, con
   return colorAtPoint;
 }
 
-Object::Object(float r, float g, float b, float specularity = 1) : color(r, g, b) {
+Object::Object(float r, float g, float b, float specularity, float indexOfRefraction)
+    : color(r, g, b), specularity(specularity), indexOfRefraction(indexOfRefraction) {
 
 }

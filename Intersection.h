@@ -5,14 +5,17 @@
 #ifndef HW5_INTERSECTION_H
 #define HW5_INTERSECTION_H
 
-#include "Objects/Sphere.h"
+#include "Objects/Object.h"
+
+class Object;
 
 class Intersection {
  public:
   const Object& object;
   double t;
+  int numIntersections;
 
-  Intersection(const Object &sphere, double t);
+  Intersection(const Object &object, double t, int numIntersections);
 };
 
 #endif //HW5_INTERSECTION_H

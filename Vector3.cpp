@@ -5,7 +5,11 @@ Vector3::Vector3() : x(0), y(0), z(0) {}
 Vector3 Vector3::normalize() const {
   double mag = magnitude();
 
-  return Vector3(x / mag, y / mag, z / mag);
+  if (mag == 0) {
+    return *this;
+  } else {
+    return Vector3(x / mag, y / mag, z / mag);
+  }
 }
 
 double Vector3::magnitude() const {
@@ -43,5 +47,8 @@ void Vector3::operator+=(Vector3 v2) {
   x += v2.x;
   y += v2.y;
   z += v2.z;
+}
+double Vector3::angleWith(Vector3 v2) const {
+  return acos(dot(v2) / (magnitude() * v2.magnitude()));
 }
 

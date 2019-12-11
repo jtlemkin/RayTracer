@@ -5,13 +5,15 @@
 #include "Sphere.h"
 #include "Object.h"
 
-Sphere::Sphere(double x, double y, double z, double radius, float r, float g, float b, float specularity = 10) :
-    Object(r, g, b, specularity), center(Vector3(x, y, z)), radius(radius) {}
+Sphere::Sphere(double x, double y, double z, double radius, float r, float g, float b, float specularity,
+               float indexOfRefraction) :
+    Object(r, g, b, specularity, indexOfRefraction), center(Vector3(x, y, z)), radius(radius) {}
 
 Vector3 Sphere::computeNormalAt(const Vector3 &point) const {
   return Vector3(2 * (point.x - center.x), 2 * (point.y - center.y), 2 * (point.z - center.z)).normalize();
 }
-double Sphere::intersect(Ray ray) const {
+
+std::optional<Intersection> Sphere::intersect(Ray ray) const {
   Vector3 dp = center - ray.origin;
 
   Vector3 u = ray.direction.normalize();
@@ -22,25 +24,26 @@ double Sphere::intersect(Ray ray) const {
 
   //If there is no solution, return the max double value implying that there is no intersection
   if (c < 0) {
-    return std::numeric_limits<double>::max();
+    return {};
   }
 
   double d = sqrt(c);
-  double intersection = a - d;
+  double intersection1 = a - d;
+  double intersection2 = a + d;
 
-  //The first calculation will return the smallest value of t because we know sqrt(d) is positive
-  //We can't have an intersection value of zero though, so if it is less than zero we need to check the next
-  //intersection
-  if (intersection >= 0.0f) {
-    return intersection;
+  int numIntersections;
+
+  if (intersection1 > 0.0f) {
+    numIntersections = d == 0 ? 1 : 2;
+
+    return Intersection(*this, intersection1, numIntersections);
   }
 
-  intersection = a + d;
+  if (intersection2 > 0.0f) {
+    numIntersections = 1;
 
-  if (intersection >= 0.0f) {
-    return intersection;
+    return Intersection(*this, intersection2, numIntersections);
   } else {
-    //There's no intersection within the domain of t
-    return std::numeric_limits<double>::max();
+    return {};
   }
 }

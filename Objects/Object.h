@@ -5,24 +5,28 @@
 #ifndef HW5_OBJECT_H
 #define HW5_OBJECT_H
 
+#include <optional>
 #include "../Vector3.h"
 #include "../Color.h"
 #include "../Light.h"
 #include "../Ray.h"
+#include "../Intersection.h"
+
+class Intersection;
 
 class Object {
- private:
-  virtual Vector3 computeNormalAt(const Vector3 &point) const = 0;
-
  public:
   Color color;
   float specularity;
+  float indexOfRefraction;
 
-  Object(float r, float g, float b, float specularity);
+  Object(float r, float g, float b, float specularity, float indexOfRefraction);
 
   Color computeColorAt(const Vector3 &point, const Vector3& cameraPos, const Light& light, float k) const;
 
-  virtual double intersect(Ray ray) const = 0;
+  virtual std::optional<Intersection> intersect(Ray ray) const = 0;
+
+  virtual Vector3 computeNormalAt(const Vector3 &point) const = 0;
 };
 
 #endif //HW5_OBJECT_H
