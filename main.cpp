@@ -8,7 +8,11 @@
 //#include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 
+#include <memory>
+#include <string>
+#include <iostream>
 #include "Scene.h"
+#include <stdio.h>
 #include "PixelBuffer.h"
 
 #else //linux
