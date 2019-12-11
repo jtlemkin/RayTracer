@@ -34,10 +34,9 @@ class Scene {
   Color computeRefractedColor(const Intersection& intersection, const Ray& ray, int level, const Vector3& view,
                               const Vector3& normal) const;
 
-  Object& getLastObject();
-
  private:
-  std::vector<std::unique_ptr<Object>> objects;
+  std::vector<Sphere> spheres;
+  std::vector<Plane> planes;
   std::vector<Light> lights;
   Color ambient;
 };

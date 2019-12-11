@@ -12,6 +12,7 @@
 #include <string>
 #include <iostream>
 #include "Scene.h"
+#include <vector>
 #include <stdio.h>
 #include "PixelBuffer.h"
 
@@ -20,7 +21,7 @@
 #include <GL/glut.h>
 #endif
 
-std::unique_ptr<Scene> scenePtr;
+std::vector<Scene> scenePtr;
 
 void init();
 void display();
@@ -48,21 +49,20 @@ int main(int argc, char **argv) {
   glutMouseFunc(mouse);     //mouse button events
   glutKeyboardFunc(key);    //Keyboard events
   //glutIdleFunc(idle);       //Function called while program is sitting "idle"
-  glutSpecialFunc(arrowkey);
 
   //initialize opengl variables
   init();
 
-  scenePtr = std::make_unique<Scene>();
-  scenePtr->setAmbientColor(0, 0, 0);
-  scenePtr->addLight(4, 4, 6, 100, 1, 1, 1);
-  scenePtr->addLight(1.5, -1, 0, 50, 1, 1, 1);
-  scenePtr->addSphere(0, 0, 10, 1, 0, 1, 0, -1);
-  scenePtr->addSphere(2, 2, 8, 0.3, 1, 1, 1, -1);
-  scenePtr->addSphere(1.5, -1, 3.5, 0.6, 1, 0, 1, 1.33);
-  scenePtr->addPlane(0, 1, 0, 2, 1, 0, 0, 1, -1);
-  scenePtr->addPlane(1, 0, 0, 2, 1, 1, 1, 1, -1);
-  scenePtr->addPlane(0, 0, -1, 15, 1, 1, 0, 0, -1);
+  scenePtr.emplace_back();
+  scenePtr[0].setAmbientColor(0, 0, 0);
+  scenePtr[0].addLight(4, 4, 6, 100, 1, 1, 1);
+  scenePtr[0].addLight(1.5, -1, 0, 50, 1, 1, 1);
+  scenePtr[0].addSphere(0, 0, 10, 1, 0, 1, 0, -1);
+  scenePtr[0].addSphere(2, 2, 8, 0.3, 1, 1, 1, -1);
+  scenePtr[0].addSphere(1.5, -1, 3.5, 0.6, 1, 0, 1, 1.33);
+  scenePtr[0].addPlane(0, 1, 0, 2, 1, 0, 0, 1, -1);
+  scenePtr[0].addPlane(1, 0, 0, 2, 1, 1, 1, 1, -1);
+  scenePtr[0].addPlane(0, 0, -1, 15, 1, 1, 0, 0, -1);
   //scenePtr->addPlane(0, 0, -1, 10, 1, 1, 1, 1, 1);
 
   //start glut event loop
@@ -120,7 +120,7 @@ void display() {
   PixelBuffer pb(*screen_size);
   pb.fill(1, 1, 1);
 
-  scenePtr->writeToBuffer(pb);
+  scenePtr[0].writeToBuffer(pb);
   pb.display();
 
   //blits the current opengl framebuffer on the screen
@@ -133,27 +133,6 @@ void display() {
 void key(unsigned char ch, int x, int y)
 {
   //redraw the scene after keyboard input
-  glutPostRedisplay();
-}
-
-void arrowkey(int key, int x, int y) {
-  switch(key) {
-    case GLUT_KEY_RIGHT:
-      scenePtr->camera.moveRight();
-      break;
-    case GLUT_KEY_LEFT:
-      scenePtr->camera.moveLeft();
-      break;
-    case GLUT_KEY_UP:
-      scenePtr->camera.moveUp();
-      break;
-    case GLUT_KEY_DOWN:
-      scenePtr->camera.moveDown();
-      break;
-    default:
-      break;
-  }
-
   glutPostRedisplay();
 }
 

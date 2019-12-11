@@ -25,8 +25,22 @@ std::optional<Intersection> Scene::intersectRay(const Ray& ray) const {
   const Object* closestObject;
   int numIntersections;
 
-  for (const auto &object : objects) {
-    auto intersection = object->intersect(ray);
+  for (const auto &sphere : spheres) {
+    auto intersection = sphere.intersect(ray);
+
+    if (intersection.has_value()) {
+      Intersection _intersection = intersection.value();
+
+      if (_intersection.t < closest and _intersection.t > 0.00001) {
+        closest = _intersection.t;
+        closestObject = &_intersection.object;
+        numIntersections = _intersection.numIntersections;
+      }
+    }
+  }
+
+  for (const auto &plane : planes) {
+    auto intersection = plane.intersect(ray);
 
     if (intersection.has_value()) {
       Intersection _intersection = intersection.value();
@@ -47,7 +61,7 @@ std::optional<Intersection> Scene::intersectRay(const Ray& ray) const {
 }
 
 void Scene::addSphere(double x, double y, double z, double radius, float r, float g, float b, float indexOfRefraction) {
-  objects.push_back(std::make_unique<Sphere>(x, y, z, radius, r, g, b, 1, indexOfRefraction));
+  spheres.emplace_back(x, y, z, radius, r, g, b, 1, indexOfRefraction);
 }
 void Scene::setAmbientColor(float r, float g, float b) {
   ambient = Color(r, g, b);
@@ -57,7 +71,7 @@ void Scene::addLight(double x, double y, double z, float intensity, float r, flo
 }
 void Scene::addPlane(double A, double B, double C, double D, float r, float g, float b, float specularity,
                      float indexOfRefraction) {
-  objects.push_back(std::make_unique<Plane>(A, B, C, D, r, g, b, specularity, indexOfRefraction));
+  planes.emplace_back(A, B, C, D, r, g, b, specularity, indexOfRefraction);
 }
 
 Color computeDirectIllumination(Vector3 lightVector, Vector3 normal, Vector3 reflectionVector, Vector3 view,
@@ -135,13 +149,9 @@ Color Scene::computeRayColor(const Ray& ray, int level) const {
         rayColor += computeRefractedColor(intersection.value(), ray, level, view, normal) * 0.5;
       }
     }
-
-    return rayColor;
   }
-}
 
-Object &Scene::getLastObject() {
-  return *objects.back();
+  return rayColor;
 }
 
 Color Scene::computeRefractedColor(const Intersection& intersection, const Ray& ray, int level, const Vector3& view,
